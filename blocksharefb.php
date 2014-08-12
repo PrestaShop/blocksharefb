@@ -37,7 +37,7 @@ class blocksharefb extends Module
 			$this->tab = 'front_office_features';
 		else
 			$this->tab = 'Blocks';
-		$this->version = '1.2.1';
+		$this->version = '1.2.2';
 		$this->author = 'PrestaShop';
 
 		parent::__construct();
