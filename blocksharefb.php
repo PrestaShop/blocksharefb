@@ -27,7 +27,7 @@
 
 if (!defined('_CAN_LOAD_FILES_'))
 	exit;
-	
+
 class blocksharefb extends Module
 {
 	public function __construct()
@@ -44,38 +44,37 @@ class blocksharefb extends Module
 
 		$this->displayName = $this->l('Facebook Share Button');
 		$this->description = $this->l('Allows customers to share products or content on Facebook.');
-		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.6.99.99');
 	}
-	
+
 	public function install()
 	{
 		return (parent::install() AND $this->registerHook('extraLeft'));
 	}
-	
+
 	public function uninstall()
 	{
-		//Delete configuration			
+		//Delete configuration
 		return (parent::uninstall() AND $this->unregisterHook(Hook::getIdByName('extraLeft')));
 	}
-	
+
 	public function hookExtraLeft($params)
 	{
-		global $smarty, $cookie, $link;		
-		
+		global $smarty, $cookie, $link;
+
 		$id_product = Tools::getValue('id_product');
 
 		if (isset($id_product) && $id_product != '')
-		{		
+		{
 			$product_infos = $this->context->controller->getProduct();
 			$smarty->assign(array(
 				'product_link' => urlencode($link->getProductLink($product_infos)),
 				'product_title' => urlencode($product_infos->name),
 			));
-			
+
 			return $this->display(__FILE__, 'blocksharefb.tpl');
 		} else {
 			return '';
 		}
 	}
 }
-
